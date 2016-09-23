@@ -1,0 +1,25 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "A Battleship Rest Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "keywords": [
+    "agnostech",
+    "kata",
+    "fun"
+  ],
+  "author": "Cortlandt Winters",
+  "license": "MIT",
+  "dependencies": {
+    "good": "^7.0.2",
+    "good-console": "^6.1.2",
+    "hapi": "^15.0.3",
+    "inert": "^4.0.2",
+    "lout": "^9.1.0",
+    "uuid": "^2.0.3",
+    "vision": "^4.1.0"
+  }
+}
