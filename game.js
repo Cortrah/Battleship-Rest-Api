@@ -92,10 +92,12 @@ module.exports = class Game {
   }
 
   testCoordinate(ship, location, facing) {
+
     // using ship.size and facing
-    // check if it fits the board (check for v or h)
+    // reject it if it doesn't fit the board (check for v or h)
     if (facing === 'HORIZONTAL'){
       if ( location.col + ship.size > 10){
+        console.log("3: "+ location.col + ":" + ship.size);
         return false;
       }
     } else {
@@ -103,8 +105,28 @@ module.exports = class Game {
         return false;
       }
     }
-    // & doesn't overlap another ship (check for v or h)
-    // for now just return true
+
+    // reject it if it overlaps another ship (check for v or h)
+    // if (facing === 'HORIZONTAL'){
+    //   for (let j = 1; j < ship.size; ++j){
+    //     let adjacentLocation = this.myMap.get(location.row + (location.col + j).toString());
+    //     if (adjacentLocation.code != '-'){
+    //       console.log("1:" + j);
+    //       return false;
+    //     }
+    //   }
+    // } else {
+    //   // facing is 'VERTICAL'
+    //   for (let k = 0; k < ship.size; ++k) {
+    //     let adjacentRow = this.rows[this.rows.indexOf(location.row) + k];
+    //     let adjacentLocation = this.myMap.get(adjacentRow + location.col);
+    //     if (adjacentLocation.code != '-') {
+    //       return false;
+    //     }
+    //   }
+    // }
+
+    // otherwise it's good
     return true;
   }
 
