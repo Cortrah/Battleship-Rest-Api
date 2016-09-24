@@ -7,32 +7,33 @@ module.exports = class Game {
   constructor() {
     this.id = uuid.v4();
     this.lastRow = '';
-    this.lastCol = 0;
+    this.lastCol = '0';
     this.rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-    // ship codes
     this.fleet = [
-      {"type": 'carrier', "code": 1},
-      {"type": 'battleship', "code": 2},
-      {"type": 'cruiser', "code": 3},
-      {"type": 'submarine', "code": 4},
-      {"type": 'destroyer', "code": 5}
+      {"type": 'carrier',     "code": 1, "size": 5, facing:"HORIZONTAL", location: {row:'A', col:1}},
+      {"type": 'battleship',  "code": 2, "size": 4, facing:"HORIZONTAL", location: {row:'B', col:1}},
+      {"type": 'cruiser',     "code": 3, "size": 3, facing:"HORIZONTAL", location: {row:'C', col:1}},
+      {"type": 'submarine',   "code": 4, "size": 3, facing:"HORIZONTAL", location: {row:'D', col:1}},
+      {"type": 'destroyer',   "code": 5, "size": 2, facing:"HORIZONTAL", location: {row:'E', col:1}},
     ];
 
-    // for My Map
-    // '0' is for an empty location
-    // '1' is for a ship type of '1'
+    // My Map
+    // the key is a Row + Col string
+    // code of '0' is for an empty location
+    // code of '1' is for a ship type of '1'
+    // ex: this.myMap.set('A1', {code: '1', isHit: false});
     this.myMap = new Map();
 
-    // for an Enemy Map
+    // Enemy Map
     // '-' is an untested location
-    // 'X' is for a hit
     // '0' is for a miss
-    // '*' is for a sunken ship
+    // '1' is for a hit
+    // '2' is for a sunken ship location
     this.enemyMap = new Map();
 
     this.initMaps();
-    this.placeShips();
+    this.placeFleet();
 
     this.actions = [];
   }
@@ -48,47 +49,78 @@ module.exports = class Game {
     };
   }
 
-  placeShips() {
-    // randomize whether we place the ship vertically or horizontally
-    let placeVertical = Math.round(Math.random(10)) === 1;
+  placeFleet() {
 
-    this.myMap.set('A1', {code: '1', isHit: false});
-    this.myMap.set('A2', {code: '1', isHit: false});
-    this.myMap.set('A3', {code: '1', isHit: false});
-    this.myMap.set('A4', {code: '1', isHit: false});
-    this.myMap.set('A5', {code: '1', isHit: false});
+    // for each ship (of size x)
+    for (let s = 0; s < this.fleet.length; ++s){
+      let ship = this.fleet[s];
 
-    this.myMap.set('B1', {code: '2', isHit: false});
-    this.myMap.set('B2', {code: '2', isHit: false});
-    this.myMap.set('B3', {code: '2', isHit: false});
-    this.myMap.set('B4', {code: '2', isHit: false});
+      // randomize whether we place each ship vertically or horizontally
+      let facing = this.coinFlip() ? 'VERTICAL' : 'HORIZONTAL';
+      // hard code for now
+      facing = 'HORIZONTAL';
 
-    this.myMap.set('C1', {code: '3', isHit: false});
-    this.myMap.set('C2', {code: '3', isHit: false});
-    this.myMap.set('C3', {code: '3', isHit: false});
+      // find a starting location for that ship with that facing
+      // which fits the board and doesn't clash with another ship
 
-    this.myMap.set('D1', {code: '4', isHit: false});
-    this.myMap.set('D2', {code: '4', isHit: false});
-    this.myMap.set('D3', {code: '4', isHit: false});
+      // choose a coordinate
+      let loc = this.getRandomLocation();
 
-    this.myMap.set('E1', {code: '5', isHit: false});
-    this.myMap.set('E2', {code: '5', isHit: false});
+      // and test it
+      this.testCoordinate( ship, loc, facing)
+
+      // once found, place the ship
+      // init the offsets to 0
+      let rowOffset = 0;
+      let colOffset = 0;
+      for( let i = 0; i < ship.size; ++i){
+        (facing === "HORIZONTAL") ? rowOffset = i : colOffset = i;
+        let key = this.offsetRow(loc.row, rowOffset) + (loc.col + colOffset).toString();
+        this.myMap.set(key, {code: ship.code, isHit: false});
+      }
+    };
   }
 
-  targetMyShot() {
-    // choose a location at random to start
-    // and save it to use for a strategy later
+  offsetRow(rowChar, offsetVal) {
+    if(offsetVal != 0) {
+      let index = this.rows.indexOf(rowChar) + offsetVal;
+      return this.rows[index];
+    } else {
+      return rowChar;
+    }
+  }
+
+  testCoordinate(ship, location, facing) {
+    // using ship.size and facing
+    // check if it fits the board (check for v or h)
+    // & doesn't overlap another ship (check for v or h)
+    // for now just return true
+    return true;
+  }
+
+  // return a random boolean value
+  coinFlip() {
+    Math.round(Math.random()) === 1;
+  }
+
+  // get a random location
+  getRandomLocation() {
     this.lastRow = this.rows[Math.floor(Math.random(10) * 10)];
     this.lastCol = Math.ceil(Math.random(10) * 10);
     return ({row: this.lastRow, col: this.lastCol});
+  }
+
+  targetMyShot() {
+    // to start just get a random location
+    return getRandomLocation();
   }
 
   recordMyShotResult(shotResults) {
     this.enemyMap.set( this.lastRow + this.lastCol, shotResults);
   }
 
-  checkIsSunk(location) {
-    let code = location.code;
+  checkIsSunk(target) {
+    let code = target.code;
     let remaining = 0;
     // see how many locations with this code are not hit,
     this.myMap.forEach( function( value) {
@@ -105,14 +137,14 @@ module.exports = class Game {
   }
 
   receiveShot(row, col) {
-    let location = this.myMap.get(row+col);
+    let target = this.myMap.get(row+col);
 
-    if(location.code === '0'){
+    if(target.code === '0'){
       // missed
       return 0;
     } else {
-      location.isHit = true;
-      if (this.checkIsSunk(location) === true) {
+      target.isHit = true;
+      if (this.checkIsSunk(target) === true) {
         return 2;
       } else {
         return 1;
@@ -129,6 +161,7 @@ module.exports = class Game {
         gridVal += code;
       };
     };
+    console.log(this.getFormattedGrid());
     return gridVal;
   }
 
