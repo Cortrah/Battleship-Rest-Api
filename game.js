@@ -97,7 +97,6 @@ module.exports = class Game {
     // reject it if it doesn't fit the board (check for v or h)
     if (facing === 'HORIZONTAL'){
       if ( location.col + ship.size > 10){
-        console.log("3: "+ location.col + ":" + ship.size);
         return false;
       }
     } else {
@@ -107,24 +106,25 @@ module.exports = class Game {
     }
 
     // reject it if it overlaps another ship (check for v or h)
-    // if (facing === 'HORIZONTAL'){
-    //   for (let j = 1; j < ship.size; ++j){
-    //     let adjacentLocation = this.myMap.get(location.row + (location.col + j).toString());
-    //     if (adjacentLocation.code != '-'){
-    //       console.log("1:" + j);
-    //       return false;
-    //     }
-    //   }
-    // } else {
-    //   // facing is 'VERTICAL'
-    //   for (let k = 0; k < ship.size; ++k) {
-    //     let adjacentRow = this.rows[this.rows.indexOf(location.row) + k];
-    //     let adjacentLocation = this.myMap.get(adjacentRow + location.col);
-    //     if (adjacentLocation.code != '-') {
-    //       return false;
-    //     }
-    //   }
-    // }
+     if (facing === 'HORIZONTAL'){
+       for (let j = 0; j < ship.size; ++j){
+         let testLocation = this.myMap.get(location.row + (location.col + j).toString());
+         if (testLocation.code != '0'){
+           return false;
+         }
+       }
+     } else {
+       // facing is 'VERTICAL'
+       for (let k = 0; k < ship.size; ++k) {
+         // add one for annoying 0/1 based index conflict
+         let adjacentRow = this.rows[this.rows.indexOf(location.row) + 1 + k];
+         // get the location for the next row, but the same column
+         let testLocation = this.myMap.get(adjacentRow + location.col);
+         if (testLocation.code != '0') {
+           return false;
+         }
+       }
+     }
 
     // otherwise it's good
     return true;
