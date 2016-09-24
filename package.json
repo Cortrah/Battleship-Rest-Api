@@ -18,10 +18,12 @@
   "author": "Cortlandt Winters",
   "license": "MIT",
   "dependencies": {
+    "code": "^4.0.0",
     "good": "^7.0.2",
     "good-console": "^6.1.2",
     "hapi": "^15.0.3",
     "inert": "^4.0.2",
+    "lab": "^11.0.1",
     "lout": "^9.1.0",
     "uuid": "^2.0.3",
     "vision": "^4.1.0"

@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 const uuid = require('uuid');
 
@@ -57,8 +57,6 @@ module.exports = class Game {
 
       // randomize whether we place each ship vertically or horizontally
       let facing = this.coinFlip() ? 'VERTICAL' : 'HORIZONTAL';
-      // hard code for now
-      facing = 'HORIZONTAL';
 
       // find a starting location for that ship with that facing
       // which fits the board and doesn't clash with another ship
@@ -77,7 +75,7 @@ module.exports = class Game {
       let rowOffset = 0;
       let colOffset = 0;
       for( let i = 0; i < ship.size; ++i){
-        (facing === "HORIZONTAL") ? rowOffset = i : colOffset = i;
+        (facing === 'HORIZONTAL') ? colOffset = i : rowOffset = i;
         let key = this.offsetRow(loc.row, rowOffset) + (loc.col + colOffset).toString();
         this.myMap.set(key, {code: ship.code, isHit: false});
       }
@@ -96,6 +94,15 @@ module.exports = class Game {
   testCoordinate(ship, location, facing) {
     // using ship.size and facing
     // check if it fits the board (check for v or h)
+    if (facing === 'HORIZONTAL'){
+      if ( location.col + ship.size > 10){
+        return false;
+      }
+    } else {
+      if ( this.rows.indexOf(location.row) + ship.size > 9){
+        return false;
+      }
+    }
     // & doesn't overlap another ship (check for v or h)
     // for now just return true
     return true;
@@ -103,7 +110,7 @@ module.exports = class Game {
 
   // return a random boolean value
   coinFlip() {
-    Math.round(Math.random()) === 1;
+    return Math.round(Math.random()) === 1;
   }
 
   // get a random location
@@ -115,7 +122,7 @@ module.exports = class Game {
 
   targetMyShot() {
     // to start just get a random location
-    let loc = getRandomLocation();
+    let loc = this.getRandomLocation();
     this.lastRow = loc.row;
     this.lastCol = loc.col;
     return ({row: loc.row, col: loc.col});;
@@ -143,7 +150,7 @@ module.exports = class Game {
   }
 
   receiveShot(row, col) {
-    let target = this.myMap.get(row+col);
+    let target = this.myMap.get(row + col);
 
     if(target.code === '0'){
       // missed
@@ -160,10 +167,10 @@ module.exports = class Game {
 
   getGrid() {
     let gridVal = '';
-    for (let rowIndex = 0; rowIndex < 10; ++rowIndex) {
+    for ( let rowIndex = 0; rowIndex < 10; ++rowIndex) {
       let rowVal = this.rows[rowIndex];
-      for (let col = 1; col <= 10; ++col) {
-        let code = this.myMap.get(rowVal + col).code;
+      for ( let col = 1; col <= 10; ++col) {
+        let code = this.myMap.get( rowVal + col).code;
         gridVal += code;
       };
     };
