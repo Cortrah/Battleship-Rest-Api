@@ -63,12 +63,15 @@ module.exports = class Game {
       // find a starting location for that ship with that facing
       // which fits the board and doesn't clash with another ship
 
-      // choose a coordinate
-      let loc = this.getRandomLocation();
+      let loc = {};
+      let found = false;
+      while(found === false) {
+        // choose a coordinate
+        loc = this.getRandomLocation();
 
-      // and test it
-      this.testCoordinate( ship, loc, facing)
-
+        // and test it
+        found = this.testCoordinate(ship, loc, facing);
+      }
       // once found, place the ship
       // init the offsets to 0
       let rowOffset = 0;
@@ -105,14 +108,17 @@ module.exports = class Game {
 
   // get a random location
   getRandomLocation() {
-    this.lastRow = this.rows[Math.floor(Math.random(10) * 10)];
-    this.lastCol = Math.ceil(Math.random(10) * 10);
-    return ({row: this.lastRow, col: this.lastCol});
+    let row = this.rows[Math.floor(Math.random(10) * 10)];
+    let col = Math.ceil(Math.random(10) * 10);
+    return ({row: row, col: col});
   }
 
   targetMyShot() {
     // to start just get a random location
-    return getRandomLocation();
+    let loc = getRandomLocation();
+    this.lastRow = loc.row;
+    this.lastCol = loc.col;
+    return ({row: loc.row, col: loc.col});;
   }
 
   recordMyShotResult(shotResults) {
