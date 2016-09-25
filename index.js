@@ -13,7 +13,7 @@ server.route([
     config: {
       description: 'Creates a game and returns a gameId and a grid with ships on it to the referee',
       tags: ['api'],
-      notes: ['use a guid for the gameId', 'validate the game board']
+      notes: ['use a guid for the gameId', 'validate the game board'],
       response: {
         schema: {
           gameId: Joi.guid().required(),
