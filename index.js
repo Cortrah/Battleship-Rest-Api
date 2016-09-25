@@ -1,4 +1,5 @@
 const Hapi = require('hapi');
+const Joi = require('joi');
 const Game = require('./game');
 
 const server = new Hapi.Server();
@@ -16,7 +17,7 @@ server.route([
       notes: ['use a guid for the gameId', 'validate the game board'],
       response: {
         schema: {
-          gameId: Joi.guid().required(),
+          gameId: Joi.string().guid().required(),
           grid: Joi.string().length(100)
         }
       }
@@ -58,19 +59,19 @@ server.route([
     }
   }, {
     method: 'POST',
-    path: '/battleship/game/{gameId}/shot-result/{result}',
+    path: '/battleship/game/{gameId}/shot-result/{shotresult}',
     config: {
       description: 'Takes a gameId and the results of our last shot, 0 miss, 1 hit, 2 sunk',
       notes: ['Validate that it receives an active gameId and that the result is 0, 1 or 2'],
       validate: {
         params: {
           gameId: Joi.string().guid().required(),
-          result: Joi.number().integer().min(0).max(2).required()
+          shotresult: Joi.number().integer().min(0).max(2).required()
         }
       }
     },
     handler: function (request, reply) {
-      games.get(request.params.gameId).recordMyShotResult(request.params.result);
+      games.get(request.params.gameId).recordMyShotResult(request.params.shotresult);
       reply(
           'shot result accepted'
       );
@@ -88,9 +89,6 @@ server.route([
           letter: Joi.string().valid('A','B','C','D','E','F','G','H','I','J').required(),
           number: Joi.number().integer().min(1).max(10).required()
         }
-      },
-      response: {
-        result: Joi.number().integer().min(0).max(2).required()
       }
     },
     handler: function (request, reply) {
