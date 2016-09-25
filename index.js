@@ -53,7 +53,7 @@ server.route([
       validate: {
         params: {
           gameId: Joi.string().guid().required(),
-          result: Joi.integer().min(0).max(2).required()
+          result: Joi.number().integer().min(0).max(2).required()
         }
       }
     },
@@ -74,7 +74,7 @@ server.route([
         params: {
           gameId: Joi.string().guid().required(),
           letter: Joi.string().valid('A','B','C','D','E','F','G','H','I','J').required(),
-          number: Joi.integer().min(1).max(10).required()
+          number: Joi.number().integer().min(1).max(10).required()
         }
       }
     },
