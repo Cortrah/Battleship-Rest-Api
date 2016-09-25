@@ -30,7 +30,12 @@ server.route([
     path: '/battleship/game/{gameId}/shot',
     config: {
       description: 'Takes a gameId and returns a shot in the form A2 (where A=Row, 2=Col)',
-      notes: ['Validate that it receives an active gameId and that the row and col are between A-J 1-10']
+      notes: ['Validate that it receives an active gameId and that the row and col are between A-J 1-10'],
+      validate: {
+        params: {
+          gameId: Joi.string().guid().required()
+        }
+      }
     },
     handler: function (request, reply) {
       let shot = games.get(request.params.gameId).targetMyShot();
@@ -44,7 +49,13 @@ server.route([
     path: '/battleship/game/{gameId}/shot-result/{result}',
     config: {
       description: 'Takes a gameId and the results of our last shot, 0 miss, 1 hit, 2 sunk',
-      notes: ['Validate that it receives an active gameId and that the payload has a result of 0, 1 or 2']
+      notes: ['Validate that it receives an active gameId and that the result is 0, 1 or 2'],
+      validate: {
+        params: {
+          gameId: Joi.string().guid().required(),
+          result: Joi.integer().min(0).max(2).required()
+        }
+      }
     },
     handler: function (request, reply) {
       games.get(request.params.gameId).recordMyShotResult(request.params.result);
@@ -58,7 +69,14 @@ server.route([
     config: {
       description: 'Receive a shot with a gameId composed of a letter and number.' +
       'Return 0 for a miss, 1 for a hit and 2 for sunk',
-      notes: ['Validate that it receives an active gameId, a leter from A-J and a number from 1-10']
+      notes: ['Validate that it receives an active gameId, a leter from A-J and a number from 1-10'],
+      validate: {
+        params: {
+          gameId: Joi.string().guid().required(),
+          letter: Joi.string().valid('A','B','C','D','E','F','G','H','I','J').required(),
+          number: Joi.integer().min(1).max(10).required()
+        }
+      }
     },
     handler: function (request, reply) {
       reply({
@@ -71,7 +89,12 @@ server.route([
     path: '/battleship/game/{gameId}',
     config: {
       description: 'Receives a gameId to delete and make inactive',
-      notes: ['Validate that the gameId was valid and the game was active']
+      notes: ['Validate that the gameId was valid and the game was active'],
+      validate: {
+        params: {
+          gameId: Joi.string().guid().required()
+        }
+      }
     },
     handler: function (request, reply) {
 
