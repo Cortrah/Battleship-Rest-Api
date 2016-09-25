@@ -164,7 +164,7 @@ module.exports = class Game {
       };
     });
 
-    if(remaining === 0){
+    if (remaining === 0){
       return true;
     } else {
       return false;
