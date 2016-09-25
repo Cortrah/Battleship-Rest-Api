@@ -14,6 +14,12 @@ server.route([
       description: 'Creates a game and returns a gameId and a grid with ships on it to the referee',
       tags: ['api'],
       notes: ['use a guid for the gameId', 'validate the game board']
+      response: {
+        schema: {
+          gameId: Joi.guid().required(),
+          grid: Joi.string().length(100)
+        }
+      }
     },
     handler: function (request, reply) {
 
@@ -34,6 +40,12 @@ server.route([
       validate: {
         params: {
           gameId: Joi.string().guid().required()
+        }
+      },
+      response: {
+        schema: {
+          letter: Joi.string().valid('A','B','C','D','E','F','G','H','I','J').required(),
+          number: Joi.number().integer().min(1).max(10).required()
         }
       }
     },
@@ -76,6 +88,9 @@ server.route([
           letter: Joi.string().valid('A','B','C','D','E','F','G','H','I','J').required(),
           number: Joi.number().integer().min(1).max(10).required()
         }
+      },
+      response: {
+        result: Joi.number().integer().min(0).max(2).required()
       }
     },
     handler: function (request, reply) {
