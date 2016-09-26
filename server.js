@@ -15,7 +15,7 @@ server.route([
     path: '/battleship/player',
     config: {
       description: 'Takes a name, ip and port and returns a registered player with playerId',
-      notes: ['Validate that it receives vaid inputs and returns a guid, generate a name if not given'],
+      notes: ['Validate that it receives valid inputs and returns a guid, generate a name if not given'],
       validate: {
         payload: {
           name: Joi.string(),
@@ -75,7 +75,7 @@ server.route([
       response: {
         schema: {
           gameId: Joi.string().guid().required(),
-          grid: Joi.string().length(100)
+          actions: Joi.object().required()
         }
       }
     },
@@ -84,7 +84,7 @@ server.route([
       clients.set(newClient.id, newClient);
       reply({
         gameId: newClient.id,
-        grid: newClient.getGrid()
+        actions: {}
       });
     }
   }, {

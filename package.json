@@ -2,9 +2,12 @@
   "name": "battleship",
   "version": "1.0.0",
   "description": "A Battleship Rest Client",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "test.js"
+    "test": "lab -c",
+    "test-lint": "lab -L",
+    "test-ws": "node $NODE_DEBUG_OPTION ./node_modules/lab/bin/lab ./test",
+    "test-cov-html": "lab -r html -o coverage.html"
   },
   "repository": {
     "type": "git",
@@ -12,11 +15,15 @@
   },
   "keywords": [
     "agnostech",
+    "rest",
     "kata",
     "fun"
   ],
   "author": "Cortlandt Winters",
   "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "dependencies": {
     "code": "^4.0.0",
     "good": "^7.0.2",
