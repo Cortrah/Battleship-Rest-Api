@@ -540,7 +540,7 @@
         <li><a href="#tests">Test Report</a></li>
         <li><a href="#coverage">Coverage Report</a></li>
         <li>
-            <span class="cov high">80</span>
+            <span class="cov high">87.57</span>
             <a href="#game.js"><span class="basename">game.js</span></a>
         </li>
         <li><a href="#linting">Linting Report</a></li>
@@ -550,8 +550,8 @@
       <div class="stats high">
           <div class="failures">0</div>
           <div class="skipped">0</div>
-          <div class="test-count">6</div>
-          <div class="duration">8</div>
+          <div class="test-count">8</div>
+          <div class="duration">11</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success"><label for="show-success">Show Success</label></input>
@@ -570,42 +570,56 @@
           <tbody>
           <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
               <td class="test-id">1</td>
-              <td class="test-title">creates a new game with a random grid containing a valid fleet has a grid of 100 characters
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - they are different each time
                   
               </td>
-              <td class="test-duration">3</td>
+              <td class="test-duration">6</td>
           </tr>
           <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
               <td class="test-id">2</td>
-              <td class="test-title">creates a new game with a random grid containing a valid fleet contains a carrier, with five 1&#x27;s
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - a grid has 100 characters
                   
               </td>
-              <td class="test-duration">0</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
               <td class="test-id">3</td>
-              <td class="test-title">creates a new game with a random grid containing a valid fleet contains a battleship, with four 2&#x27;s
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - all between 0 and 5
                   
               </td>
-              <td class="test-duration">0</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
               <td class="test-id">4</td>
-              <td class="test-title">creates a new game with a random grid containing a valid fleet contains a cruiser, with three 3&#x27;s
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - it contains a carrier (has five 1&#x27;s)
                   
               </td>
               <td class="test-duration">0</td>
           </tr>
           <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
               <td class="test-id">5</td>
-              <td class="test-title">creates a new game with a random grid containing a valid fleet contains a submarine, with three 4&#x27;s
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - it contains a battleship (has four 2&#x27;s)
                   
               </td>
               <td class="test-duration">0</td>
           </tr>
           <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
               <td class="test-id">6</td>
-              <td class="test-title">creates a new game with a random grid containing a valid fleet contains a destroyer, with two 5&#x27;s
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - it contains a cruiser (has three 3&#x27;s)
+                  
+              </td>
+              <td class="test-duration">0</td>
+          </tr>
+          <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
+              <td class="test-id">7</td>
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - it contains a submarine (has three 4&#x27;s)
+                  
+              </td>
+              <td class="test-duration">0</td>
+          </tr>
+          <tr class="show creates_a_new_game_with_a_random_grid_containing_a_valid_fleet success">
+              <td class="test-id">8</td>
+              <td class="test-title">creates a new game with a random grid containing a valid fleet - it contains a destroyer (has two 5&#x27;s)
                   
               </td>
               <td class="test-duration">0</td>
@@ -616,19 +630,19 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">80%</div>
+            <div class="percentage">87.57%</div>
             <div class="sloc">185</div>
-            <div class="hits">148</div>
-            <div class="misses">37</div>
+            <div class="hits">162</div>
+            <div class="misses">23</div>
         </div>
         <div id="files">
             <div class="file">
                 <h2 id="game.js">game.js</h2>
                 <div class="stats high">
-                    <div class="percentage">80%</div>
+                    <div class="percentage">87.57%</div>
                     <div class="sloc">185</div>
-                    <div class="hits">148</div>
-                    <div class="misses">37</div>
+                    <div class="hits">162</div>
+                    <div class="misses">23</div>
                 </div>
                 <table>
                     <thead>
@@ -691,19 +705,19 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>9</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.lastRow &#x3D; &#x27;&#x27;;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>10</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.lastCol &#x3D; &#x27;0&#x27;;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>11</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.rows &#x3D; [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;D&#x27;, &#x27;E&#x27;, &#x27;F&#x27;, &#x27;G&#x27;, &#x27;H&#x27;, &#x27;I&#x27;, &#x27;J&#x27;];</td>
                         </tr>
                         <tr class="hit">
@@ -715,7 +729,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>13</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.fleet &#x3D; [</td>
                         </tr>
                         <tr class="hit">
@@ -793,7 +807,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>26</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.myMap &#x3D; new Map();</td>
                         </tr>
                         <tr class="hit">
@@ -835,7 +849,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>33</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.enemyMap &#x3D; new Map();</td>
                         </tr>
                         <tr class="hit">
@@ -847,13 +861,13 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>35</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.initMaps();</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>36</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    this.placeFleet();</td>
                         </tr>
                         <tr class="hit">
@@ -883,31 +897,31 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>41</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      for (let rowIndex &#x3D; 0; rowIndex &lt; 10; ++rowIndex) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>42</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        let rowVal &#x3D; this.rows[rowIndex];</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>43</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        let key &#x3D; rowVal+col;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>44</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        this.enemyMap.set(key, &#x27;-&#x27;);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>45</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        this.myMap.set(key, {code: &#x27;0&#x27;, isHit: false});</td>
                         </tr>
                         <tr class="hit">
@@ -961,7 +975,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>54</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      let ship &#x3D; this.fleet[s];</td>
                         </tr>
                         <tr class="hit">
@@ -976,12 +990,12 @@
                             <td class="hits" data-tooltip></td>
                             <td class="source">      // randomize whether we place each ship vertically or horizontally</td>
                         </tr>
-                            <tr class="chunks">
-                                <td class="line" data-tooltip>57</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source"><div>      let facing &#x3D; </div><div class="miss false" data-tooltip>this.coinFlip()</div><div> ? </div><div class="miss never" data-tooltip>&#x27;VERTICAL&#x27;</div><div> : &#x27;HORIZONTAL&#x27;;</div></td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>57</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">      let facing &#x3D; this.coinFlip() ? &#x27;VERTICAL&#x27; : &#x27;HORIZONTAL&#x27;;</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>58</td>
                             <td class="lint empty"></td>
@@ -1009,19 +1023,19 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>62</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      let loc &#x3D; {};</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>63</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      let found &#x3D; false;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>64</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      while(found &#x3D;&#x3D;&#x3D; false) {</td>
                         </tr>
                         <tr class="hit">
@@ -1033,7 +1047,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>66</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>8</td>
+                            <td class="hits" data-tooltip>24</td>
                             <td class="source">        loc &#x3D; this.getRandomLocation();</td>
                         </tr>
                         <tr class="hit">
@@ -1051,7 +1065,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>69</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>8</td>
+                            <td class="hits" data-tooltip>24</td>
                             <td class="source">        found &#x3D; this.testCoordinate(ship, loc, facing);</td>
                         </tr>
                         <tr class="hit">
@@ -1075,37 +1089,37 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>73</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      let rowOffset &#x3D; 0;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>74</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      let colOffset &#x3D; 0;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>75</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">      for( let i &#x3D; 0; i &lt; ship.size; ++i){</td>
                         </tr>
-                            <tr class="chunks">
-                                <td class="line" data-tooltip>76</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source"><div>        (</div><div class="miss true" data-tooltip>facing &#x3D;&#x3D;&#x3D; &#x27;HORIZONTAL&#x27;</div><div>) ? colOffset &#x3D; i : </div><div class="miss never" data-tooltip>rowOffset &#x3D; i</div><div>;</div></td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>76</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>34</td>
+                            <td class="source">        (facing &#x3D;&#x3D;&#x3D; &#x27;HORIZONTAL&#x27;) ? colOffset &#x3D; i : rowOffset &#x3D; i;</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>77</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>17</td>
+                            <td class="hits" data-tooltip>34</td>
                             <td class="source">        let key &#x3D; this.offsetRow(loc.row, rowOffset) + (loc.col + colOffset).toString();</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>78</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>17</td>
+                            <td class="hits" data-tooltip>34</td>
                             <td class="source">        this.myMap.set(key, {code: ship.code, isHit: false});</td>
                         </tr>
                         <tr class="hit">
@@ -1138,24 +1152,24 @@
                             <td class="hits" data-tooltip></td>
                             <td class="source">  offsetRow(rowChar, offsetVal) {</td>
                         </tr>
-                            <tr class="chunks">
-                                <td class="line" data-tooltip>84</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source"><div>    if(</div><div class="miss false" data-tooltip>offsetVal !&#x3D; 0</div><div>) {</div></td>
-                            </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>85</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>      let index &#x3D; this.rows.indexOf(rowChar) + offsetVal;</td>
-                            </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>86</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>      return this.rows[index];</td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>84</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">    if(offsetVal !&#x3D; 0) {</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>85</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>9</td>
+                            <td class="source">      let index &#x3D; this.rows.indexOf(rowChar) + offsetVal;</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>86</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>9</td>
+                            <td class="source">      return this.rows[index];</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>87</td>
                             <td class="lint empty"></td>
@@ -1165,7 +1179,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>88</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>17</td>
+                            <td class="hits" data-tooltip>25</td>
                             <td class="source">      return rowChar;</td>
                         </tr>
                         <tr class="hit">
@@ -1210,22 +1224,22 @@
                             <td class="hits" data-tooltip></td>
                             <td class="source">    // reject it if it doesn&#x27;t fit the board (check for v or h)</td>
                         </tr>
-                            <tr class="chunks">
-                                <td class="line" data-tooltip>96</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source"><div>    if (</div><div class="miss true" data-tooltip>facing &#x3D;&#x3D;&#x3D; &#x27;HORIZONTAL&#x27;</div><div>){</div></td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>96</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">    if (facing &#x3D;&#x3D;&#x3D; &#x27;HORIZONTAL&#x27;){</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>97</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>8</td>
+                            <td class="hits" data-tooltip>15</td>
                             <td class="source">      if ( location.col + ship.size &gt; 10){</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>98</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>3</td>
+                            <td class="hits" data-tooltip>4</td>
                             <td class="source">        return false;</td>
                         </tr>
                         <tr class="hit">
@@ -1240,18 +1254,18 @@
                             <td class="hits" data-tooltip></td>
                             <td class="source">    } else {</td>
                         </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>101</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>      if ( this.rows.indexOf(location.row) + ship.size &gt; 9){</td>
-                            </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>102</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>        return false;</td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>101</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>9</td>
+                            <td class="source">      if ( this.rows.indexOf(location.row) + ship.size &gt; 9){</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>102</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>6</td>
+                            <td class="source">        return false;</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>103</td>
                             <td class="lint empty"></td>
@@ -1276,36 +1290,36 @@
                             <td class="hits" data-tooltip></td>
                             <td class="source">    // reject it if it overlaps another ship (check for v or h)</td>
                         </tr>
-                            <tr class="chunks">
-                                <td class="line" data-tooltip>107</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source"><div>     if (</div><div class="miss true" data-tooltip>facing &#x3D;&#x3D;&#x3D; &#x27;HORIZONTAL&#x27;</div><div>){</div></td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>107</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>14</td>
+                            <td class="source">     if (facing &#x3D;&#x3D;&#x3D; &#x27;HORIZONTAL&#x27;){</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>108</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>11</td>
                             <td class="source">       for (let j &#x3D; 0; j &lt; ship.size; ++j){</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>109</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>17</td>
+                            <td class="hits" data-tooltip>31</td>
                             <td class="source">         let testLocation &#x3D; this.myMap.get(location.row + (location.col + j).toString());</td>
                         </tr>
-                            <tr class="chunks">
-                                <td class="line" data-tooltip>110</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source"><div>         if (</div><div class="miss false" data-tooltip>testLocation.code !&#x3D; &#x27;0&#x27;</div><div>){</div></td>
-                            </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>111</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>           return false;</td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>110</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>31</td>
+                            <td class="source">         if (testLocation.code !&#x3D; &#x27;0&#x27;){</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>111</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>4</td>
+                            <td class="source">           return false;</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>112</td>
                             <td class="lint empty"></td>
@@ -1330,41 +1344,41 @@
                             <td class="hits" data-tooltip></td>
                             <td class="source">       // facing is &#x27;VERTICAL&#x27;</td>
                         </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>116</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>       for (let k &#x3D; 0; k &lt; ship.size; ++k) {</td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>116</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>3</td>
+                            <td class="source">       for (let k &#x3D; 0; k &lt; ship.size; ++k) {</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>117</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source">         // add one for annoying 0/1 based index conflict</td>
                         </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>118</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>         let adjacentRow &#x3D; this.rows[this.rows.indexOf(location.row) + 1 + k];</td>
-                            </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>118</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>12</td>
+                            <td class="source">         let adjacentRow &#x3D; this.rows[this.rows.indexOf(location.row) + 1 + k];</td>
+                        </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>119</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source">         // get the location for the next row, but the same column</td>
                         </tr>
-                            <tr class="miss">
-                                <td class="line" data-tooltip>120</td>
-                                <td class="lint empty"></td>
-                                <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>         let testLocation &#x3D; this.myMap.get(adjacentRow + location.col);</td>
-                            </tr>
-                            <tr class="miss">
+                        <tr class="hit">
+                            <td class="line" data-tooltip>120</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>12</td>
+                            <td class="source">         let testLocation &#x3D; this.myMap.get(adjacentRow + location.col);</td>
+                        </tr>
+                            <tr class="chunks">
                                 <td class="line" data-tooltip>121</td>
                                 <td class="lint empty"></td>
                                 <td class="hits" data-tooltip></td>
-                                <td class="source" data-tooltip>         if (testLocation.code !&#x3D; &#x27;0&#x27;) {</td>
+                                <td class="source"><div>         if (</div><div class="miss false" data-tooltip>testLocation.code !&#x3D; &#x27;0&#x27;</div><div>) {</div></td>
                             </tr>
                             <tr class="miss">
                                 <td class="line" data-tooltip>122</td>
@@ -1405,7 +1419,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>128</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>5</td>
+                            <td class="hits" data-tooltip>10</td>
                             <td class="source">    return true;</td>
                         </tr>
                         <tr class="hit">
@@ -1471,13 +1485,13 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>139</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>8</td>
+                            <td class="hits" data-tooltip>24</td>
                             <td class="source">    let col &#x3D; Math.ceil(Math.random(10) * 10);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>140</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>8</td>
+                            <td class="hits" data-tooltip>24</td>
                             <td class="source">    return ({row: row, col: col});</td>
                         </tr>
                         <tr class="hit">
@@ -1777,31 +1791,31 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>190</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    for ( let rowIndex &#x3D; 0; rowIndex &lt; 10; ++rowIndex) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>191</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      let rowVal &#x3D; this.rows[rowIndex];</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>192</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      for ( let col &#x3D; 1; col &lt;&#x3D; 10; ++col) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>193</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        let code &#x3D; this.myMap.get( rowVal + col).code;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>194</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        gridVal +&#x3D; code;</td>
                         </tr>
                         <tr class="hit">
@@ -1819,13 +1833,13 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>197</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    console.log(this.getFormattedGrid());</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>198</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    return gridVal;</td>
                         </tr>
                         <tr class="hit">
@@ -1861,37 +1875,37 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>204</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    for (let rowIndex &#x3D; 0; rowIndex &lt; 10; ++rowIndex) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>205</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      let rowVal &#x3D; this.rows[rowIndex];</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>206</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      let row &#x3D; &#x27;&#x27;;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>207</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      for (let col &#x3D; 1; col &lt;&#x3D; 10; ++col) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>208</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        let code &#x3D; this.myMap.get(rowVal + col).code;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>209</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>100</td>
+                            <td class="hits" data-tooltip>200</td>
                             <td class="source">        row +&#x3D; code;</td>
                         </tr>
                         <tr class="hit">
@@ -1903,7 +1917,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>211</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
+                            <td class="hits" data-tooltip>20</td>
                             <td class="source">      formattedGrid +&#x3D; row + &#x27;\n&#x27;;</td>
                         </tr>
                         <tr class="hit">
@@ -1915,7 +1929,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>213</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
+                            <td class="hits" data-tooltip>2</td>
                             <td class="source">    return formattedGrid;</td>
                         </tr>
                         <tr class="hit">

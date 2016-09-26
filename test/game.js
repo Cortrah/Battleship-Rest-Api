@@ -12,32 +12,43 @@ lab.experiment('creates a new game with a random grid containing a valid fleet',
   const game = new Game();
   const grid = game.getGrid();
 
-  lab.test('has a grid of 100 characters', (done) => {
+  lab.test('- they are different each time', (done) => {
+    const otherGame = new Game();
+    Assert( grid != otherGame.getGrid());
+    done();
+  });
+
+  lab.test('- a grid has 100 characters', (done) => {
     Assert( grid.length === 100);
     done();
   });
 
-  lab.test('contains a carrier, with five 1\'s', (done) => {
+  lab.test('- all between 0 and 5', (done) => {
+    Assert( grid.match(/[^0-5]/g) === null);
+    done();
+  });
+
+  lab.test('- it contains a carrier (has five 1\'s)', (done) => {
     Assert( grid.match(/1/g).length === 5);
     done();
   });
 
-  lab.test('contains a battleship, with four 2\'s', (done) => {
+  lab.test('- it contains a battleship (has four 2\'s)', (done) => {
     Assert( grid.match(/2/g).length === 4);
     done();
   });
 
-  lab.test('contains a cruiser, with three 3\'s', (done) => {
+  lab.test('- it contains a cruiser (has three 3\'s)', (done) => {
     Assert( grid.match(/3/g).length === 3);
     done();
   });
 
-  lab.test('contains a submarine, with three 4\'s', (done) => {
+  lab.test('- it contains a submarine (has three 4\'s)', (done) => {
     Assert( grid.match(/4/g).length === 3);
     done();
   });
 
-  lab.test('contains a destroyer, with two 5\'s', (done) => {
+  lab.test('- it contains a destroyer (has two 5\'s)', (done) => {
     Assert( grid.match(/5/g).length === 2);
     done();
   });
