@@ -34,8 +34,6 @@ module.exports = class Game {
 
     this.initMaps();
     this.placeFleet();
-
-    this.actions = [];
   }
 
   initMaps() {
