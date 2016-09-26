@@ -1,6 +1,7 @@
 const Hapi = require('hapi');
 const Joi = require('joi');
-const Client = require('./client');
+const Client1 = require('./client');
+const Client2 = require('./client4002');
 const Player = require('./player');
 
 const server = new Hapi.Server();
@@ -8,6 +9,12 @@ server.connection({port: 5000});
 
 let clients = new Map();
 let players = new Map();
+
+let p1 = new Player("Thing1", 'http://pumpkin.local:', '4000');
+let p2 = new Player("Thing2", 'http://pumpkin.local:', '4002');
+
+players.set(p1.id, p1);
+players.set(p2.id, p2);
 
 server.route([
   {
@@ -35,7 +42,7 @@ server.route([
       }
     },
     handler: function (request, reply) {
-      let newPlayer = new Player(request.payload);
+      let newPlayer = new Player(request.payload.name, request.payload.ip, request.payload.port);
       players.set(newPlayer.id, newPlayer);
 
       reply({
@@ -45,6 +52,18 @@ server.route([
         port: newPlayer.port,
         wins: newPlayer.wins,
         losses: newPlayer.losses
+      });
+    }
+  }, {
+    method: 'GET',
+    path: '/battleship/players',
+    config: {
+      description: 'Return a list of players'
+    },
+    handler: function (request, reply) {
+
+      reply({
+        players: players,
       });
     }
   }, {
@@ -68,31 +87,41 @@ server.route([
     }
   },{
     method: 'POST',
-    path: '/battleship/game',
+    path: '/battleship/match',
     config: {
-      description: 'Takes two registered players ids and spawns a game for them',
-      notes: ['use a guid for the player and game ids, monitor play with local game board to determine victor'],
+      description: 'Takes two registered players ids and spawns a match for them, returning the results',
+      notes: ['uses guids for the players and match ids, monitor play with local game board to determine victor'],
       response: {
         schema: {
-          gameId: Joi.string().guid().required(),
-          actions: Joi.object().required()
+          matchResults: Joi.object().required()
         }
       }
     },
     handler: function (request, reply) {
-      let newClient = new Client();
-      clients.set(newClient.id, newClient);
+      let newMatch = new Match();
+      matches.set(newMatch.id, newMatch);
       reply({
-        gameId: newClient.id,
-        actions: {}
+        matchResults: newMatch
+      });
+    }
+  }, {
+    method: 'GET',
+    path: '/battleship/matches',
+    config: {
+      description: 'Return a list of matches'
+    },
+    handler: function (request, reply) {
+
+      reply({
+        matches: matches,
       });
     }
   }, {
     method: 'DELETE',
-    path: '/battleship/game/{gameId}',
+    path: '/battleship/match/{matchId}',
     config: {
-      description: 'Receives a gameId to delete and make inactive',
-      notes: ['Validate that the gameId was valid and the game was active'],
+      description: 'Receives a matchId to delete and make inactive',
+      notes: ['Validate that the matchId was valid and the game was active'],
       validate: {
         params: {
           gameId: Joi.string().guid().required()
@@ -100,11 +129,11 @@ server.route([
       }
     },
     handler: function (request, reply) {
-      if(clients.has(gameId)){
-        clients.clear(request.params.gameId);
-        reply('game deleted');
+      if(matches.has(matchId)){
+        matches.clear(request.params.matchId);
+        reply('match deleted');
       } else {
-        reply('game not found');
+        reply('match not found');
       }
     }
   }, {
@@ -114,9 +143,7 @@ server.route([
       description: 'Default route for any get handlers, point the user to docs for reference information',
     },
     handler: function (request, reply) {
-      reply(
-          'Battleship Game Server ' + server.info.uri + ':5000/docs for details'
-      );
+      reply('players', this.players);
     }
   }
 ]);
@@ -137,6 +164,15 @@ server.register([
   if (err) {
     return console.error(err);
   }
+
+  server.views({
+    engines: {
+      hbs: require('handlebars')
+    },
+    relativeTo: __dirname,
+    path: './views',
+    isCached: false
+  });
 
   server.start((err) => {
 

@@ -2,7 +2,7 @@
 
 const uuid = require('uuid');
 
-module.exports = class Game {
+module.exports = class Targeter {
 
   constructor() {
     this.id = uuid.v4();

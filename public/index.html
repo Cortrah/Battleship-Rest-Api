@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battleship Referee</title>
+</head>
+<body>
+
+<h1>Battleship A GoGo</h1>
+
+{{#each players}}
+    <h3 >{{name}}: {{wins}} - {{losses}}</h3>
+    <span>{{ip}} {{port}}</span>
+{{each}}
+
+<button>Play</button>
+
+{{#each matches}}
+    <h3 >{{winner}} beat {{looser}}</h3>
+{{each}}
+
+</body>
+</html>

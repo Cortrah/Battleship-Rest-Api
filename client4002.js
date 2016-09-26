@@ -3,7 +3,7 @@ const Joi = require('joi');
 const Targeter = require('./targeter');
 
 const server = new Hapi.Server();
-server.connection({port: 4000});
+server.connection({port: 4002});
 
 let Targeters = new Map();
 

@@ -3,18 +3,18 @@
 const Assert = require('assert');
 const Lab = require('lab');
 
-const Game = require('../game');
+const Targeter = require('../targeter');
 
 const lab = exports.lab = Lab.script();
 
 lab.experiment('creates a new game with a random grid containing a valid fleet', () => {
 
-  const game = new Game();
-  const grid = game.getGrid();
+  const targeter = new Targeter();
+  const grid = targeter.getGrid();
 
   lab.test('- they are different each time', (done) => {
-    const otherGame = new Game();
-    Assert( grid != otherGame.getGrid());
+    const otherTargeter = new Targeter();
+    Assert( grid != otherTargeter.getGrid());
     done();
   });
 
