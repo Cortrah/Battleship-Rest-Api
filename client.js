@@ -3,7 +3,7 @@ const Joi = require('joi');
 const Game = require('./game');
 
 const server = new Hapi.Server();
-server.connection({port: 5000});
+server.connection({port: 4000});
 
 let games = new Map();
 
