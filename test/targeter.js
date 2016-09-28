@@ -67,8 +67,8 @@ lab.experiment('receives and reports shots', () => {
 
     let firstBlankIndex = grid.indexOf('0');
     // Todo: extract targeter.rows to shared space
-    let firstBlankRow = targeter.rows[Math.floor(firstBlankIndex / 10)];
-    let firstBlankCol = firstBlankIndex % 10 + 1;
+    const firstBlankRow = targeter.rows[Math.floor(firstBlankIndex / 10)];
+    const firstBlankCol = firstBlankIndex % 10 + 1;
 
     Assert(targeter.receiveShot(firstBlankRow, firstBlankCol) === 0);
     done();
@@ -77,9 +77,9 @@ lab.experiment('receives and reports shots', () => {
   lab.test('- receives and returns a hit', (done) => {
 
     // Todo: extract fleet codes to shared space
-    let firstSubIndex = grid.indexOf('4');
-    let firstSubRow = targeter.rows[Math.floor(firstSubIndex / 10)];
-    let firstSubCol = firstSubIndex % 10 + 1;
+    const firstSubIndex = grid.indexOf('4');
+    const firstSubRow = targeter.rows[Math.floor(firstSubIndex / 10)];
+    const firstSubCol = firstSubIndex % 10 + 1;
 
     Assert(targeter.receiveShot(firstSubRow, firstSubCol) === 1);
     done();
@@ -87,9 +87,9 @@ lab.experiment('receives and reports shots', () => {
   });
 
   lab.test('- records a series of shots and notifies of a sunken ship', (done) => {
-    let firstDestroyerIndex = grid.indexOf('5');
-    let firstDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10)];
-    let firstDestroyerCol = firstDestroyerIndex % 10 + 1;
+    const firstDestroyerIndex = grid.indexOf('5');
+    const firstDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10)];
+    const firstDestroyerCol = firstDestroyerIndex % 10 + 1;
     let secondDestroyerRow = '';
 
     Assert(targeter.receiveShot(firstDestroyerRow, firstDestroyerCol) === 1);
