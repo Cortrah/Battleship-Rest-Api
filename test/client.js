@@ -1,11 +1,11 @@
-'use strict';
+//'use strict';
 
-const Assert = require('assert');
-const Lab = require('lab');
+//const Assert = require('assert');
+//const Lab = require('lab');
 
-const lab = exports.lab = Lab.script();
+//const lab = exports.lab = Lab.script();
 
-let restClient;
+//let restClient;
 
 //lab.before((done) => {
 //
@@ -36,19 +36,19 @@ let restClient;
 //    })
 //  });
 
-  //lab.test('- it creates a shot', (done) => {
-  //
-  //  const options = {
-  //    method: 'POST',
-  //    url: '/battleship/game/afc59c54-fc18-4b27-8894-8b59799d174a/shot'
-  //  }
-  //
-  //  restClient.inject( options, (res) => {
-  //
-  //    Assert(res.statusCode === 200);
-  //    const response = JSON.parse(res.payload);
-  //    done();
-  //  })
-  //});
+//lab.test('- it creates a shot', (done) => {
+//
+//  const options = {
+//    method: 'POST',
+//    url: '/battleship/game/afc59c54-fc18-4b27-8894-8b59799d174a/shot'
+//  }
+//
+//  restClient.inject( options, (res) => {
+//
+//    Assert(res.statusCode === 200);
+//    const response = JSON.parse(res.payload);
+//    done();
+//  })
+//});
 //});
 
