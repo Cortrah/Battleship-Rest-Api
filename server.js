@@ -9,6 +9,7 @@ server.connection({port: 5000});
 
 let clients = new Map();
 let players = new Map();
+let matches = new Map();
 
 let p1 = new Player("Thing1", 'http://pumpkin.local:', '4000');
 let p2 = new Player("Thing2", 'http://pumpkin.local:', '4002');

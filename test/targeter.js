@@ -53,4 +53,79 @@ lab.experiment('creates a new game with a random grid containing a valid fleet',
     done();
   });
 
+  // Todo: - check that the #'s are contiguous
+
+});
+
+lab.experiment('receives and reports shots', () => {
+
+  const targeter = new Targeter();
+  const grid = targeter.getGrid();
+
+  lab.test('- receives and returns a miss', (done) => {
+
+    let firstBlankIndex = grid.indexOf('0');
+    // Todo: extract targeter.rows to shared space
+    let firstBlankRow = targeter.rows[Math.floor(firstBlankIndex / 10)];
+    let firstBlankCol = firstBlankIndex % 10 + 1;
+
+    Assert(targeter.receiveShot(firstBlankRow, firstBlankCol) === 0);
+    done();
+  });
+
+  lab.test('- receives and returns a hit', (done) => {
+
+    // Todo: extract fleet codes to shared space
+    let firstSubIndex = grid.indexOf('4');
+    let firstSubRow = targeter.rows[Math.floor(firstSubIndex / 10)];
+    let firstSubCol = firstSubIndex % 10 + 1;
+
+    Assert(targeter.receiveShot(firstSubRow, firstSubCol) === 1);
+    done();
+
+  });
+
+  lab.test('- records a series of shots and notifies of a sunken ship', (done) => {
+
+    let firstDestroyerIndex = grid.indexOf('5');
+    let firstDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10)];
+    let firstDestroyerCol = firstDestroyerIndex % 10 + 1;
+
+    Assert(targeter.receiveShot(firstDestroyerRow, firstDestroyerCol) === 1);
+
+    if (grid[firstDestroyerIndex + 1] === 5) {
+      // then the destroyer is horizontal
+      Assert(targeter.receiveShot(firstDestroyerRow, firstDestroyerCol + 1) === 2);
+    } else {
+      // the destroyer is vertical
+      let secondDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10) + 1];
+      Assert(targeter.receiveShot(secondDestroyerRow, firstDestroyerCol) === 2);
+    }
+
+    // after the second shot the first shot should also return sunk
+    Assert(targeter.receiveShot(firstDestroyerRow, firstDestroyerCol) === 2);
+    done();
+  });
+});
+
+lab.experiment('targets and records shots', () => {
+
+  const targeter = new Targeter();
+  const grid = targeter.getGrid();
+
+  lab.test('- returns a shot in the form of {row:"A", col:"2"}', (done) => {
+
+    const shot = targeter.targetMyShot();
+    Assert(targeter.rows.includes(shot.row));
+    //Assert( (1 < shot.col) && (shot.col <= 10));
+
+    // notify of a hit
+    targeter.recordMyShotResult(1);
+
+    // and check that it was recorded
+    let newGrid = targeter.getGrid()
+    Assert(newGrid.charAt(targeter.rows.indexOf(shot.row)*10 + shot.col) === "1");
+
+    done();
+  });
 });

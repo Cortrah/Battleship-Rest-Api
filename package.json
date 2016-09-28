@@ -36,5 +36,8 @@
     "lout": "^9.1.0",
     "uuid": "^2.0.3",
     "vision": "^4.1.0"
+  },
+  "devDependencies": {
+    "lab": "11.x.x"
   }
 }
