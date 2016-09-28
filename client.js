@@ -1,3 +1,5 @@
+'use strict';
+
 const Hapi = require('hapi');
 const Joi = require('joi');
 const Targeter = require('./targeter');
@@ -131,6 +133,7 @@ server.route([
     }
   }
 ]);
+
 
 server.register([
   require('vision'),

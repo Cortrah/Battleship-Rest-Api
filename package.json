@@ -2,7 +2,7 @@
   "name": "battleship",
   "version": "1.0.0",
   "description": "A Battleship Rest Client",
-  "main": "server.js",
+  "main": "client.js",
   "scripts": {
     "test": "lab -c",
     "test-lint": "lab -L",
