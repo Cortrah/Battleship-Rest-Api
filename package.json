@@ -4,6 +4,7 @@
   "description": "A Battleship Rest Client",
   "main": "client.js",
   "scripts": {
+    "start": "node client.js",
     "test": "lab -c",
     "test-lint": "lab -L",
     "test-ws": "node $NODE_DEBUG_OPTION ./node_modules/lab/bin/lab ./test",
