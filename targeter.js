@@ -194,7 +194,6 @@ module.exports = class Targeter {
         gridVal += code;
       };
     };
-    console.log(this.getFormattedGrid());
     return gridVal;
   }
 

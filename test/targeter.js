@@ -11,6 +11,7 @@ lab.experiment('creates a new game with a random grid containing a valid fleet',
 
   const targeter = new Targeter();
   const grid = targeter.getGrid();
+  console.log(targeter.getFormattedGrid());
 
   lab.test('- they are different each time', (done) => {
     const otherTargeter = new Targeter();
@@ -86,19 +87,19 @@ lab.experiment('receives and reports shots', () => {
   });
 
   lab.test('- records a series of shots and notifies of a sunken ship', (done) => {
-
     let firstDestroyerIndex = grid.indexOf('5');
     let firstDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10)];
     let firstDestroyerCol = firstDestroyerIndex % 10 + 1;
+    let secondDestroyerRow = '';
 
     Assert(targeter.receiveShot(firstDestroyerRow, firstDestroyerCol) === 1);
 
-    if (grid[firstDestroyerIndex + 1] === 5) {
+    if (grid[firstDestroyerIndex + 1] === '5') {
       // then the destroyer is horizontal
       Assert(targeter.receiveShot(firstDestroyerRow, firstDestroyerCol + 1) === 2);
     } else {
       // the destroyer is vertical
-      let secondDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10) + 1];
+      secondDestroyerRow = targeter.rows[Math.floor(firstDestroyerIndex / 10) + 1];
       Assert(targeter.receiveShot(secondDestroyerRow, firstDestroyerCol) === 2);
     }
 
@@ -117,14 +118,13 @@ lab.experiment('targets and records shots', () => {
 
     const shot = targeter.targetMyShot();
     Assert(targeter.rows.includes(shot.row));
-    //Assert( (1 < shot.col) && (shot.col <= 10));
+    Assert( (0 < shot.col) && (shot.col  <= 10));
 
     // notify of a hit
     targeter.recordMyShotResult(1);
 
     // and check that it was recorded
-    let newGrid = targeter.getGrid()
-    Assert(newGrid.charAt(targeter.rows.indexOf(shot.row)*10 + shot.col) === "1");
+    Assert(targeter.enemyMap.get(shot.row+shot.col) === 1);
 
     done();
   });
