@@ -115,7 +115,7 @@ module.exports = class Targeter {
        // facing is 'VERTICAL'
        for (let k = 0; k < ship.size; ++k) {
          // add one for annoying 0/1 based index conflict
-         let adjacentRow = this.rows[this.rows.indexOf(location.row) + 1 + k];
+         let adjacentRow = this.rows[this.rows.indexOf(location.row) + k];
          // get the location for the next row, but the same column
          let testLocation = this.myMap.get(adjacentRow + location.col);
          if (testLocation.code != '0') {
