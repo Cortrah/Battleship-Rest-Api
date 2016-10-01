@@ -2,7 +2,7 @@
 
 const Hapi = require('hapi');
 const Joi = require('joi');
-const Targeter = require('./targeter');
+const Targeter = require('./domain/targeter');
 
 const server = new Hapi.Server();
 server.connection({port: 4000});

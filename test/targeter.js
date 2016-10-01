@@ -3,7 +3,7 @@
 const Assert = require('assert');
 const Lab = require('lab');
 
-const Targeter = require('../targeter');
+const Targeter = require('../domain/targeter');
 
 const lab = exports.lab = Lab.script();
 
