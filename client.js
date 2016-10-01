@@ -134,7 +134,6 @@ server.route([
   }
 ]);
 
-
 server.register([
   require('vision'),
   require('inert'),
@@ -161,3 +160,5 @@ server.register([
     console.log('Battleship client running at:', server.info.uri);
   });
 });
+
+module.exports = server;
