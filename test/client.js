@@ -41,7 +41,7 @@ lab.experiment('test a game', () => {
 
       Assert(res.statusCode === 200);
       const response = JSON.parse(res.payload);
-      Assert(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].indexOf(response.letter !== -1));
+      Assert(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].indexOf(response.letter) !== -1);
       Assert(response.number > 0);
       Assert(response.number <= 10);
       done();
@@ -76,6 +76,21 @@ lab.experiment('test a game', () => {
       const response = JSON.parse(res.payload);
       Assert(response.result >= 0);
       Assert(response.result <= 2);
+      done();
+    })
+  });
+
+  lab.test('- it deletes the test game', (done) => {
+
+    const options = {
+      method: 'DELETE',
+      url: '/battleship/game/' + testGameId
+    };
+
+    client.inject( options, (res) => {
+
+      Assert(res.statusCode === 200);
+      Assert(res.payload === "game deleted");
       done();
     })
   });

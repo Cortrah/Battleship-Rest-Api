@@ -113,7 +113,7 @@ server.route([
     },
     handler: function (request, reply) {
 
-      if(Targeters.has(gameId)){
+      if(Targeters.has(request.params.gameId)){
         Targeters.clear(request.params.gameId);
         reply('game deleted');
       } else {
