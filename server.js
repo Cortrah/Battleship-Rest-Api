@@ -2,11 +2,11 @@ const Hapi = require('hapi');
 const Joi = require('joi');
 const Client = require('./client');
 const Player = require('./domain/player');
+const Match = require('./domain/match');
 
 const server = new Hapi.Server();
 server.connection({port: 5000});
 
-let clients = new Map();
 let players = new Map();
 let matches = new Map();
 
@@ -31,7 +31,7 @@ server.route([
           ip: Joi.string().required(),
           port: Joi.string().required(),
           wins: Joi.number().integer().required(),
-          losses: Joi.number().integer().required(),
+          losses: Joi.number().integer().required()
         }
       }
     },
@@ -72,7 +72,7 @@ server.route([
       },
     },
     handler: function (request, reply) {
-      if(players.has(playerId)){
+      if(players.has(request.params.playerId)){
         players.clear(request.params.playerId);
         reply('player deleted');
       } else {
@@ -87,15 +87,28 @@ server.route([
       notes: ['uses guids for the players and match ids, monitor play with local game board to determine victor'],
       response: {
         schema: {
-          matchResults: Joi.object().required()
+          matchResults: Joi.object(),
+          message: Joi.string()
         }
       }
     },
     handler: function (request, reply) {
-      let newMatch = new Match();
+      // extract players from payload playerId's
+      // and create a match
+      let player1 = new Player("Inspector Gadget");
+      let player2 = new Player("Hong Kong Phoey");
+      let newMatch = new Match(player1, player2);
+
+      players.set(player1.id, player1);
+      players.set(player2.id, player2);
       matches.set(newMatch.id, newMatch);
+      // then play the match until there is a winner
+      newMatch.play();
+
+      // then reply with the matchResults
       reply({
-        matchResults: newMatch
+        matchResults: newMatch,
+        message: newMatch.winner.name + ' won'
       });
     }
   }, {
@@ -118,12 +131,12 @@ server.route([
       notes: ['Validate that the matchId was valid and the game was active'],
       validate: {
         params: {
-          gameId: Joi.string().guid().required()
+          matchId: Joi.string().guid().required()
         }
       }
     },
     handler: function (request, reply) {
-      if(matches.has(matchId)){
+      if(matches.has(request.params.matchId)){
         matches.clear(request.params.matchId);
         reply('match deleted');
       } else {
