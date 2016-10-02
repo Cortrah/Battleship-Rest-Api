@@ -1,10 +1,12 @@
 'use strict';
 
+const Targeter = require('./targeter');
+
 const uuid = require('uuid');
 
 module.exports = class Player {
 
-  constructor( name = '', ip = '123.0.0.1', port = "4001") {
+  constructor( name = '', ip = 'http://pumpkin.local', port = "4000") {
 
     this.id = uuid.v4();
     this.name = name;
@@ -12,5 +14,6 @@ module.exports = class Player {
     this.port = port;
     this.wins = 0;
     this.losses = 0;
+    this.targeter = new Targeter();
   }
 };
