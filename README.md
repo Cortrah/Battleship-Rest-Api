@@ -10,8 +10,16 @@ from the root battleship directory
 then to start the rest client server
 
 	npm start 
+	
+to start a referee server that runs two players in a match
+	
+	node server.js
 
-if you then go to localhost:4000/docs you can see the docs for the rest api
+if you then go to localhost:4000/docs you can see the docs for the client rest api
+
+if you then go to localhost:5000/docs you can see the docs for the referee server api
+
+if you send a post request to http://pumpkin.local:5000/battleship/match you will see a match result
 
 you can run the tests with
 
