@@ -54,6 +54,10 @@ lab.experiment('creates a new game with a random grid containing a valid fleet',
     done();
   });
 
+  lab.test('- it has a fleet with 5 ships', (done) => {
+    Assert( targeter.shipsRemaining() === 5);
+    done();
+  });
   // Todo: - check that the #'s are contiguous
 
 });
