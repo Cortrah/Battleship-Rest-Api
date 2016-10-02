@@ -11,11 +11,11 @@ module.exports = class Targeter {
     this.rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
     this.fleet = [
-      {"type": 'carrier',     "code": 1, "size": 5, facing:"HORIZONTAL", location: {row:'A', col:1}},
-      {"type": 'battleship',  "code": 2, "size": 4, facing:"HORIZONTAL", location: {row:'B', col:1}},
-      {"type": 'cruiser',     "code": 3, "size": 3, facing:"HORIZONTAL", location: {row:'C', col:1}},
-      {"type": 'submarine',   "code": 4, "size": 3, facing:"HORIZONTAL", location: {row:'D', col:1}},
-      {"type": 'destroyer',   "code": 5, "size": 2, facing:"HORIZONTAL", location: {row:'E', col:1}},
+      {"type": 'carrier',     "code": 1, "size": 5, facing:"HORIZONTAL", location: {row:'A', col:1}, isSunk: false},
+      {"type": 'battleship',  "code": 2, "size": 4, facing:"HORIZONTAL", location: {row:'B', col:1}, isSunk: false},
+      {"type": 'cruiser',     "code": 3, "size": 3, facing:"HORIZONTAL", location: {row:'C', col:1}, isSunk: false},
+      {"type": 'submarine',   "code": 4, "size": 3, facing:"HORIZONTAL", location: {row:'D', col:1}, isSunk: false},
+      {"type": 'destroyer',   "code": 5, "size": 2, facing:"HORIZONTAL", location: {row:'E', col:1}, isSunk: false},
     ];
 
     // My Map
@@ -163,10 +163,17 @@ module.exports = class Targeter {
     });
 
     if (remaining === 0){
+      // set the fleet ship with that code to isSunk = true
+      this.fleet.find( ship => ship.code === target.code).isSunk = true;
       return true;
     } else {
       return false;
     }
+  }
+
+  shipsRemaining(){
+    // get count of fleet ships with isSunk = false
+    return this.fleet.filter((ship) => {return (ship.isSunk === false) }).length
   }
 
   receiveShot(row, col) {
