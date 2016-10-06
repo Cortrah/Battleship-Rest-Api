@@ -6,13 +6,14 @@ module.exports = class Match {
 
   constructor(player1, player2) {
     this.id = uuid.v4();
-    this.name = '';
+    this.name = player1.name + ' vs ' + player2.name;
     // order in the array determines who goes first
     this.players = [];
     this.actions = [];
     this.winner = null;
 
-    if(this.coinFlip()){
+    // randomize who gets to go first
+    if(this.coinFlip() === true){
       this.players.push(player1);
       this.players.push(player2);
     } else {
@@ -36,8 +37,16 @@ module.exports = class Match {
         // return a result to the first player
         this.players[0].targeter.recordMyShotResult(shotResult);
 
+        this.actions.push({
+          "action": 'shot',
+          "playerId": this.players[0].id,
+          "target": shot,
+          "result": shotResult
+        });
+
+        let shipsLeft = this.players[1].targeter.shipsRemaining();
         // check for victory again
-        if (this.players[1].targeter.shipsRemaining() === 0) {
+        if (shipsLeft === 0) {
           // notify of victory
           this.winner = this.players[0];
           this.players[0].wins++;
@@ -57,8 +66,16 @@ module.exports = class Match {
           // return a result to the first player
           this.players[1].targeter.recordMyShotResult(shotResult);
 
+          this.actions.push({
+            "action": 'shot',
+            "playerId": this.players[1].id,
+            "target": shot,
+            "result": shotResult
+          });
+
+          let shipsLeft = this.players[0].targeter.shipsRemaining();
           // check for victory again
-          if (this.players[0].targeter.shipsRemaining() === 0) {
+          if (shipsLeft === 0) {
             // notify of victory
             this.winner = this.players[1];
             this.players[1].wins++;
