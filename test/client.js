@@ -95,5 +95,20 @@ lab.experiment('test a game', () => {
     })
   });
 
+  lab.test('- it notifies of a game not found', (done) => {
+
+    const options = {
+      method: 'DELETE',
+      url: '/battleship/game/' + testGameId
+    };
+
+    client.inject( options, (res) => {
+
+      Assert(res.statusCode === 200);
+      Assert(res.payload === "game not found");
+      done();
+    })
+  });
+
 });
 
