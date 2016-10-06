@@ -1,21 +1,26 @@
+'use strict';
+
 const Hapi = require('hapi');
 const Joi = require('joi');
-const Client = require('./client');
+const Client = require('./client')
 const Player = require('./domain/player');
 const Match = require('./domain/match');
+const randomNames = require('./util/randomNames.js');
 
 const server = new Hapi.Server();
-server.connection({port: 5000});
+server.connection({
+  port: 5000
+});
 
-let players = new Map();
-let matches = new Map();
+let players = [];
+let matches = [];
 
 server.route([
   {
     method: 'POST',
     path: '/battleship/player',
     config: {
-      description: 'Takes a name, ip and port and returns a registered player with playerId',
+      description: 'Takes an ip and port (optionally a name) and returns a registered player with playerId',
       notes: ['Validate that it receives valid inputs and returns a guid, generate a name if not given'],
       validate: {
         payload: {
@@ -26,7 +31,7 @@ server.route([
       },
       response: {
         schema: {
-          playerId: Joi.string().guid().required(),
+          id: Joi.string().guid().required(),
           name: Joi.string().required(),
           ip: Joi.string().required(),
           port: Joi.string().required(),
@@ -37,10 +42,10 @@ server.route([
     },
     handler: function (request, reply) {
       let newPlayer = new Player(request.payload.name, request.payload.ip, request.payload.port);
-      players.set(newPlayer.id, newPlayer);
+      players.push(newPlayer);
 
       reply({
-        playerId: newPlayer.id,
+        id: newPlayer.id,
         name: newPlayer.name,
         ip: newPlayer.ip,
         port: newPlayer.port,
@@ -72,8 +77,9 @@ server.route([
       },
     },
     handler: function (request, reply) {
-      if(players.has(request.params.playerId)){
-        players.clear(request.params.playerId);
+      let index = players.findIndex( p => p.id === request.params.playerId)
+      if(index != -1){
+        players.splice(index,1);
         reply('player deleted');
       } else {
         reply('player not found');
@@ -85,6 +91,12 @@ server.route([
     config: {
       description: 'Takes two registered players ids and spawns a match for them, returning the results',
       notes: ['uses guids for the players and match ids, monitor play with local game board to determine victor'],
+      validate: {
+        payload: {
+          player1Id: Joi.string().guid().required(),
+          player2Id: Joi.string().guid().required()
+        }
+      },
       response: {
         schema: {
           matchResults: Joi.object(),
@@ -93,15 +105,22 @@ server.route([
       }
     },
     handler: function (request, reply) {
+
       // extract players from payload playerId's
       // and create a match
-      let player1 = new Player("Inspector Gadget");
-      let player2 = new Player("Hong Kong Phoey");
+      let player1 = players.find( p => p.id === request.payload.player1Id);
+      let player2 = players.find( p => p.id === request.payload.player2Id);
+      if (player1 === undefined){
+        player1 = new Player(randomNames());
+        players.push(player1);
+      }
+      if (player2 === undefined){
+        player2 = new Player(randomNames());
+        players.push(player2);
+      }
       let newMatch = new Match(player1, player2);
 
-      players.set(player1.id, player1);
-      players.set(player2.id, player2);
-      matches.set(newMatch.id, newMatch);
+      matches.push(newMatch);
       // then play the match until there is a winner
       newMatch.play();
 
@@ -136,8 +155,9 @@ server.route([
       }
     },
     handler: function (request, reply) {
-      if(matches.has(request.params.matchId)){
-        matches.clear(request.params.matchId);
+      let index = matches.findIndex( p => p.id === request.params.matchId)
+      if(index != -1){
+        matches.splice(index,1);
         reply('match deleted');
       } else {
         reply('match not found');
@@ -150,7 +170,7 @@ server.route([
       description: 'Default route for any get handlers, point the user to docs for reference information',
     },
     handler: function (request, reply) {
-      reply('players', this.players);
+      'Battleship Game Server ' + server.info.uri + '/docs for details'
     }
   }
 ]);
@@ -166,7 +186,8 @@ server.register([
         reporter: [{module: 'good-console'}, 'stdout']
       }
     }
-  }], (err) => {
+  }
+], (err) => {
 
   if (err) {
     return console.error(err);
@@ -190,3 +211,5 @@ server.register([
     console.log('Battleship Server running at:', server.info.uri);
   });
 });
+
+module.exports = server;
