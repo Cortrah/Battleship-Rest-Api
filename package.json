@@ -2,9 +2,9 @@
   "name": "battleship",
   "version": "1.0.0",
   "description": "A Battleship Rest Client",
-  "main": "client.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node client.js",
+    "start": "node server.js",
     "test": "lab -c",
     "test-lint": "lab -L",
     "test-ws": "node $NODE_DEBUG_OPTION ./node_modules/lab/bin/lab ./test",
