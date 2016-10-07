@@ -4,14 +4,13 @@ const uuid = require('uuid');
 
 module.exports = class Match {
 
-  constructor(player1, player2, useRemoteCalls = false) {
+  constructor(player1, player2) {
     this.id = uuid.v4();
     this.name = player1.name + ' vs ' + player2.name;
     // order in the array determines who goes first
     this.players = [];
     this.actions = [];
     this.winner = null;
-    this.useRemoteCalls = useRemoteCalls;
 
     // randomize who gets to go first
     if(this.coinFlip() === true){
@@ -28,15 +27,15 @@ module.exports = class Match {
       // if the other players ships are not sunk
       if (this.players[1].targeter.shipsRemaining() > 0) {
         // ask for a shot from the first player
-        let shot = this.targetMyShot(0);
+        let shot = this.players[0].targeter.targetMyShot();
 
         // get a result from the second player
         // first via http ala wreck
         // but also check it for accuracy myself
-        let shotResult = this.receiveShot(1, shot);
+        let shotResult = this.players[1].targeter.receiveShot(shot.row, shot.col);
 
         // return a result to the first player
-        this.recordMyShotResult(0, shotResult);
+        this.players[0].targeter.recordMyShotResult(shotResult);
 
         this.actions.push({
           "action": 'shot',
@@ -57,15 +56,15 @@ module.exports = class Match {
       if( this.winner === null) {
         if (this.players[0].targeter.shipsRemaining() > 0) {
           // ask for a shot from the first player
-          let shot = this.targetMyShot(1);
+          let shot = this.players[1].targeter.targetMyShot();
 
           // get a result from the second player
           // first via http ala wreck
           // but also check it for accuracy myself
-          let shotResult = this.receiveShot(0, shot);
+          let shotResult = this.players[0].targeter.receiveShot(shot.row, shot.col);
 
           // return a result to the first player
-          this.recordMyShotResult(1, shotResult);
+          this.players[1].targeter.recordMyShotResult(shotResult);
 
           this.actions.push({
             "action": 'shot',
@@ -89,29 +88,5 @@ module.exports = class Match {
 
   coinFlip() {
     return Math.round(Math.random()) === 1;
-  }
-
-  targetMyShot (playerIndex) {
-    if(this.useRemoteCalls === true){
-      //
-    } else {
-      return this.players[playerIndex].targeter.targetMyShot();
-    }
-  }
-
-  receiveShot (playerIndex, shot) {
-    if(this.useRemoteCalls === true){
-      //
-    } else {
-      return this.players[playerIndex].targeter.receiveShot(shot.row, shot.col);
-    }
-  }
-
-  recordMyShotResult (playerIndex, shotResult) {
-    if(this.useRemoteCalls === true){
-      //
-    } else {
-      this.players[playerIndex].targeter.recordMyShotResult(shotResult);
-    }
   }
 };

@@ -2,7 +2,6 @@
 
 const Hapi = require('hapi');
 const Joi = require('joi');
-const Client = require('./client')
 const Player = require('./domain/player');
 const Match = require('./domain/match');
 const randomNames = require('./util/randomNames.js');
@@ -90,10 +89,9 @@ server.route([
     path: '/battleship/match',
     config: {
       description: 'Takes two registered players ids and spawns a match for them, returning the results',
-      notes: ['monitor play with local game board to determine victor. When useRemoteCalls = false, just run internally, default is true and calls localhost client on port 4000'],
+      notes: ['uses guids for the players and match ids, monitor play with local game board to determine victor'],
       validate: {
         payload: {
-          useRemoteCalls: Joi.boolean(),
           player1Id: Joi.string().guid().required(),
           player2Id: Joi.string().guid().required()
         }
@@ -119,7 +117,7 @@ server.route([
         player2 = new Player(randomNames());
         players.push(player2);
       }
-      let newMatch = new Match(player1, player2, request.payload.useRemoteCalls);
+      let newMatch = new Match(player1, player2);
 
       matches.push(newMatch);
       // then play the match until there is a winner
