@@ -8,11 +8,15 @@
 
 <h1>Match</h1>
 
-<h3>{{ name }} won</h3>
+<h3>{{ match.winner.name }} won</h3>
 
-{{#each players}}
-    <h3>{{ name }}</h3>
-    <h3>{{ message }}</h3>
+{{#each match.actions}}
+    <span>{{ playerName }}</span>
+    targets
+    <span>{{ target.row }}{{ target.col}}</span>
+     -
+    <span>{{ result }}</span>
+    <br/>
 {{/each}}
 
 </body>

@@ -40,6 +40,7 @@ module.exports = class Match {
         this.actions.push({
           "action": 'shot',
           "playerId": this.players[0].id,
+          "playerName": this.players[0].name,
           "target": shot,
           "result": shotResult
         });
@@ -69,6 +70,7 @@ module.exports = class Match {
           this.actions.push({
             "action": 'shot',
             "playerId": this.players[1].id,
+            "playerName": this.players[1].name,
             "target": shot,
             "result": shotResult
           });

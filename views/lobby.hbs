@@ -15,8 +15,8 @@
 <a href='http://dinkydog.local:5000/battleship/api/init'>create match</a>
 
 {{#each matches}}
-    <h3>{{name}} : {{winner}} won</h3>
-    <button onClick='http://dinkydog.local:5000/match/{{ id }}'>details</button>
+    <h3>{{name}} : {{ winner.name }} won</h3>
+    <a href='http://dinkydog.local:5000/match/{{ id }}'>details</a>
 {{/each}}
 
 </body>
