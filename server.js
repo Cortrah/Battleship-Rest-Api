@@ -2,7 +2,7 @@
 
 const Hapi = require('hapi');
 const Joi = require('joi');
-const Client = require('./client')
+// const Client = require('./client')
 const Player = require('./domain/player');
 const Match = require('./domain/match');
 const randomNames = require('./util/randomNames.js');
@@ -85,7 +85,7 @@ server.route([
         reply('player not found');
       }
     }
-  },{
+  }, {
     method: 'POST',
     path: '/battleship/match',
     config: {
@@ -108,16 +108,37 @@ server.route([
 
       // extract players from payload playerId's
       // and create a match
-      let player1 = players.find( p => p.id === request.payload.player1Id);
-      let player2 = players.find( p => p.id === request.payload.player2Id);
-      if (player1 === undefined){
+      let player1 = players.find(p => p.id === request.payload.player1Id);
+      let player2 = players.find(p => p.id === request.payload.player2Id);
+      if (player1 === undefined) {
         player1 = new Player(randomNames());
         players.push(player1);
       }
-      if (player2 === undefined){
+      if (player2 === undefined) {
         player2 = new Player(randomNames());
         players.push(player2);
       }
+      let newMatch = new Match(player1, player2);
+
+      matches.push(newMatch);
+      // then play the match until there is a winner
+      newMatch.play();
+
+      // then reply with the matchResults
+      reply({
+        matchResults: newMatch,
+        message: newMatch.winner.name + ' won'
+      });
+    }
+  }, {
+    method: 'GET',
+    path: '/battleship/match',
+    handler: function (request, reply) {
+
+      let player1 = new Player(randomNames());
+      players.push(player1);
+      let player2 = new Player(randomNames());
+      players.push(player2);
       let newMatch = new Match(player1, player2);
 
       matches.push(newMatch);
@@ -155,13 +176,29 @@ server.route([
       }
     },
     handler: function (request, reply) {
-      let index = matches.findIndex( p => p.id === request.params.matchId)
-      if(index != -1){
-        matches.splice(index,1);
+      let index = matches.findIndex(p => p.id === request.params.matchId)
+      if (index != -1) {
+        matches.splice(index, 1);
         reply('match deleted');
       } else {
         reply('match not found');
       }
+    }
+  }, {
+    method: 'GET',
+    path: '/lobby',
+    handler: function (request, reply) {
+      reply.view('lobby', {
+        players: players
+      });
+    }
+  }, {
+    method: 'GET',
+    path: '/match',
+    handler: function (request, reply) {
+      reply.view('match', {
+        match: matches[0]
+      });
     }
   }, {
     method: 'GET',
@@ -170,7 +207,7 @@ server.route([
       description: 'Default route for any get handlers, point the user to docs for reference information',
     },
     handler: function (request, reply) {
-      'Battleship Game Server ' + server.info.uri + '/docs for details'
+      reply('Battleship Game Server ' + server.info.uri + '/docs for details')
     }
   }
 ]);
