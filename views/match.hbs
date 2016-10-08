@@ -6,9 +6,14 @@
 </head>
 <body>
 
-<h1>Matches</h1>
+<h1>Match</h1>
 
-<button>{{ players.length }}</button>
+<h3>{{ name }} won</h3>
+
+{{#each players}}
+    <h3>{{ name }}</h3>
+    <h3>{{ message }}</h3>
+{{/each}}
 
 </body>
 </html>

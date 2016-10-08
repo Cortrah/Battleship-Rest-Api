@@ -8,11 +8,15 @@
 
 <h1>Lobby</h1>
 
-<button onClick='http://dinkydog.local:5000/battleship/match'>create match</button>
-
 {{#each players}}
     <h3>{{name}}: {{wins}} - {{losses}}</h3>
-    <span>{{ip}} {{port}}</span>
+{{/each}}
+
+<a href='http://dinkydog.local:5000/battleship/api/init'>create match</a>
+
+{{#each matches}}
+    <h3>{{name}} : {{winner}} won</h3>
+    <button onClick='http://dinkydog.local:5000/match/{{ id }}'>details</button>
 {{/each}}
 
 </body>

@@ -18,7 +18,7 @@ let matches = [];
 server.route([
   {
     method: 'POST',
-    path: '/battleship/player',
+    path: '/battleship/api/player',
     config: {
       description: 'Takes an ip and port (optionally a name) and returns a registered player with playerId',
       notes: ['Validate that it receives valid inputs and returns a guid, generate a name if not given'],
@@ -55,7 +55,7 @@ server.route([
     }
   }, {
     method: 'GET',
-    path: '/battleship/players',
+    path: '/battleship/api/players',
     config: {
       description: 'Return a list of players'
     },
@@ -66,8 +66,20 @@ server.route([
       });
     }
   }, {
+    method: 'GET',
+    path: '/battleship/api/player/{playerId}',
+    config: {
+      description: 'Return a player'
+    },
+    handler: function (request, reply) {
+      let player = players.find(p => p.id === request.params.playerId);
+      reply({
+        player: player,
+      });
+    }
+  }, {
     method: 'DELETE',
-    path: '/battleship/player/{playerId}',
+    path: '/battleship/api/player/{playerId}',
     config: {
       description: 'Delete a player defined by a playerId',
       validate: {
@@ -87,7 +99,7 @@ server.route([
     }
   }, {
     method: 'POST',
-    path: '/battleship/match',
+    path: '/battleship/api/match',
     config: {
       description: 'Takes two registered players ids and spawns a match for them, returning the results',
       notes: ['uses guids for the players and match ids, monitor play with local game board to determine victor'],
@@ -132,7 +144,7 @@ server.route([
     }
   }, {
     method: 'GET',
-    path: '/battleship/match',
+    path: '/battleship/api/init',
     handler: function (request, reply) {
 
       let player1 = new Player(randomNames());
@@ -145,15 +157,14 @@ server.route([
       // then play the match until there is a winner
       newMatch.play();
 
-      // then reply with the matchResults
       reply({
-        matchResults: newMatch,
-        message: newMatch.winner.name + ' won'
+
+        match: newMatch,
       });
     }
   }, {
     method: 'GET',
-    path: '/battleship/matches',
+    path: '/battleship/api/matches',
     config: {
       description: 'Return a list of matches'
     },
@@ -164,8 +175,20 @@ server.route([
       });
     }
   }, {
+    method: 'GET',
+    path: '/battleship/api/match/{matchId}',
+    config: {
+      description: 'Return a match'
+    },
+    handler: function (request, reply) {
+      let match = matches.find(m => m.id === request.params.matchId);
+      reply({
+        match: match,
+      });
+    }
+  }, {
     method: 'DELETE',
-    path: '/battleship/match/{matchId}',
+    path: '/battleship/api/match/{matchId}',
     config: {
       description: 'Receives a matchId to delete and make inactive',
       notes: ['Validate that the matchId was valid and the game was active'],
@@ -189,15 +212,17 @@ server.route([
     path: '/lobby',
     handler: function (request, reply) {
       reply.view('lobby', {
-        players: players
+        players: players,
+        matches: matches
       });
     }
   }, {
     method: 'GET',
-    path: '/match',
+    path: '/match/{matchId}',
     handler: function (request, reply) {
+      let match = matches.find(m => m.id === request.params.matchId);
       reply.view('match', {
-        match: matches[0]
+        match: match
       });
     }
   }, {
