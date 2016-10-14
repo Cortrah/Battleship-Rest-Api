@@ -10,7 +10,7 @@ https://github.com/restgames/battleship-client
 
 The client.js file of this repo is a restful api solution in javascript using node and hapi.
 
-To run the client clone the repositor and from the root battleship directory
+To run the client, clone the repository. And from the root battleship directory type
 
 	npm install
 
@@ -19,20 +19,20 @@ Then to start the rest client server
 	node client.js
 	
 	
-Then if you then go to localhost:4000/docs you can see the docs for the client rest api
+Then if you go to localhost:4000/docs you can see the docs for the client rest api
 
 I have no idea how to setup php but if you run the referee server and point it to port 4000 this client implements the spec.
 
-You can see the tests in tests/client.js or and run them with
+You can see the tests in tests/client.js or run them with
 
 	npm test 
 
-if you have a problem running the tests you may need to install lab globally in addition to locally with
+If you have a problem running the tests you may need to install lab globally in addition to locally with
 
 	npm install -g lab
 
 
-you can create a nicely formatted coverage.html file that you can view to see the test coverage
+You can create a nicely formatted coverage.html file that you can view to see the test coverage
 
 	npm run test-cov-html 
 
