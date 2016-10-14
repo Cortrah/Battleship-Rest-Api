@@ -6,7 +6,7 @@ module.exports = function randomName() {
     let names = [
         "Hondo", "Pufinstuf", "Hong Kong Phooey",
         "Inspector Gadget", "Alexi", "Franko", "Soupy",
-        "Digdug", "Grouper", "Flayrah"
+        "Digdug", "Grouper", "Flayrah", "Joe"
     ];
 
     const randomIndex = Math.round(Math.random(10) * 10);

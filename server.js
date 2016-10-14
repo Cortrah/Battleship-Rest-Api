@@ -5,7 +5,7 @@ const Joi = require('joi');
 // const Client = require('./client')
 const Player = require('./domain/player');
 const Match = require('./domain/match');
-const randomNames = require('./util/randomNames.js');
+const randomName = require('./util/random-name.js');
 
 const server = new Hapi.Server();
 server.connection({
@@ -123,11 +123,11 @@ server.route([
       let player1 = players.find(p => p.id === request.payload.player1Id);
       let player2 = players.find(p => p.id === request.payload.player2Id);
       if (player1 === undefined) {
-        player1 = new Player(randomNames());
+        player1 = new Player(randomName());
         players.push(player1);
       }
       if (player2 === undefined) {
-        player2 = new Player(randomNames());
+        player2 = new Player(randomName());
         players.push(player2);
       }
       let newMatch = new Match(player1, player2);
@@ -147,9 +147,9 @@ server.route([
     path: '/battleship/api/init',
     handler: function (request, reply) {
 
-      let player1 = new Player(randomNames());
+      let player1 = new Player(randomName());
       players.push(player1);
-      let player2 = new Player(randomNames());
+      let player2 = new Player(randomName());
       players.push(player2);
       let newMatch = new Match(player1, player2);
 
