@@ -1,10 +1,12 @@
-# Battleship
+# Battleship Rest Api's
 
 This project is a code Kata for the Agnostechvalley group
 https://github.com/agnostechvalley/katas/tree/master/2016-06
 
 The original spec and php referee server is here
 https://github.com/restgames/battleship-client
+
+It contains a javascript solution for the original challenge and a simple server to stub out matches between different instances of the client.
 
 ## A Javascript Solution
 
