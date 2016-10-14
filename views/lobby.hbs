@@ -12,11 +12,11 @@
     <h3>{{name}}: {{wins}} - {{losses}}</h3>
 {{/each}}
 
-<a href='http://dinkydog.local:5000/battleship/api/init'>create match</a>
+<a href='{{ server.info.uri }}/battleship/api/init'>create match</a>
 
 {{#each matches}}
     <h3>{{name}} : {{ winner.name }} won</h3>
-    <a href='http://dinkydog.local:5000/match/{{ id }}'>details</a>
+    <a href='{{ server.info.uri }}/match/{{ id }}'>details</a>
 {{/each}}
 
 </body>
