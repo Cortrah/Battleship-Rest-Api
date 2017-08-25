@@ -59,6 +59,6 @@ http://localhost:5000/battleship/api/init
 
 Then if you go to the lobby you can see each players win loss record and their matches
 
-http://localhost:5000/battleship/lobby
+http://localhost:5000/lobby
 
 From here you can either create a new match or view the details for previous matches
