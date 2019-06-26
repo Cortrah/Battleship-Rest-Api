@@ -19,7 +19,7 @@ lab.experiment('creates a new match with two players', () => {
 
     const person = {
       name: 'Mr Monster',
-      ip: 'http://pumpkin.local',
+      ip: 'http://localhost',
       port: '4000'
     };
 
@@ -46,7 +46,7 @@ lab.experiment('creates a new match with two players', () => {
 
     const person = {
       name: 'Hapi Pumpkin',
-      ip: 'http://pumpkin.local',
+      ip: 'http://localhost',
       port: '4000'
     };
 

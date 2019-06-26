@@ -23,21 +23,21 @@
   "author": "Cortlandt Winters",
   "license": "MIT",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "code": "^4.0.0",
     "good": "^7.0.2",
     "good-console": "^6.1.2",
-    "handlebars": "^4.0.5",
-    "hapi": "^15.0.3",
+    "handlebars": "^4.1.2",
+    "hapi": "^16.7.0",
     "inert": "^4.0.2",
-    "joi": "^9.0.4",
+    "joi": "^14.3.1",
     "lout": "^9.1.0",
-    "uuid": "^2.0.3",
+    "uuid": "^3.3.2",
     "vision": "^4.1.0"
   },
   "devDependencies": {
-    "lab": "^11.0.1"
+    "lab": "^18.0.2"
   }
 }
