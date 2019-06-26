@@ -1,11 +1,13 @@
 'use strict';
 
-const Hapi = require('hapi');
-const Joi = require('joi');
+const Hapi = require('@hapi/hapi');
+const Joi = require('@hapi/joi');
 const Targeter = require('./domain/targeter');
 
-const server = new Hapi.Server();
-server.connection({port: 4000});
+const server = new Hapi.Server({
+  host: 'localhost',
+  port: 4000
+});
 
 let Targeters = new Map();
 
@@ -135,11 +137,10 @@ server.route([
 ]);
 
 server.register([
-  require('vision'),
-  require('inert'),
-  require('lout'),
+  require('@hapi/vision'),
+  require('@hapi/inert'),
   {
-    register: require('good'),
+    register: require('@hapi/good'),
     options: {
       reporters: {
         reporter: [{module: 'good-console'}, 'stdout']

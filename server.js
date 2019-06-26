@@ -1,14 +1,15 @@
 'use strict';
 
-const Hapi = require('hapi');
-const Joi = require('joi');
+const Hapi = require('@hapi/hapi');
+const Joi = require('@hapi/joi');
+
 // const Client = require('./client')
 const Player = require('./domain/player');
 const Match = require('./domain/match');
 const randomName = require('./util/random-name.js');
 
-const server = new Hapi.Server();
-server.connection({
+const server = new Hapi.Server({
+  host: 'localhost',
   port: 5000
 });
 
@@ -238,9 +239,8 @@ server.route([
 ]);
 
 server.register([
-  require('vision'),
-  require('inert'),
-  require('lout'),
+  require('@hapi/vision'),
+  require('@hapi/inert'),
   {
     register: require('good'),
     options: {
